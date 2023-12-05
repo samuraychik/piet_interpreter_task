@@ -5,17 +5,20 @@ except ModuleNotFoundError:
     from piet_vm import PietVM, CC, DP
     from piet_colors import HEX_COLORS, HEX_WHITE, HEX_BLACK
 finally:
+    import sys
     from operator import itemgetter
     from PIL import Image
 
+
 PIET_COMMANDS = [
     ["piet_pass", "piet_push", "piet_pop"],
-    ["piet_add", "piet_sub", "piet_mult"],
+    ["piet_add", "piet_sub", "piet_mul"],
     ["piet_div", "piet_mod", "piet_not"],
     ["piet_gt", "piet_pointer", "piet_switch"],
     ["piet_dup", "piet_roll", "piet_innum"],
     ["piet_inchar", "piet_outnum", "piet_outchar"],
     ]
+
 
 class PietInterpreter:
     def __init__(self, filename, codel_size=1, debug=False, vmdebug=False):
@@ -86,7 +89,7 @@ class PietInterpreter:
                 return
         else:
             self._debug_log("EXECUTION TRAPPED")
-            exit()
+            sys.exit("trapped")
         
     def _is_valid(self, x, y):
         return 0 <= x < self.cols and 0 <= y < self.rows \
@@ -136,6 +139,7 @@ class PietInterpreter:
         return PIET_COMMANDS[d_hue % 6][d_light % 3]
     
     def _do_command(self, command):
+        self._debug_log_command_sent(command)
         piet_command = getattr(self.pvm, command)
         piet_command()
         
@@ -160,6 +164,9 @@ class PietInterpreter:
     def _debug_log_color_change(self, old, new):
         self._debug_log(f"{old['light'].name} {old['hue'].name} -> " \
                         f"{new['light'].name} {new['hue'].name}")
+    
+    def _debug_log_command_sent(self, command):
+        self._debug_log(f"DO {str.upper(command)}")
                 
     def _debug_log(self, message):
         if self.debug:

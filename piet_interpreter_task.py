@@ -1,9 +1,10 @@
 import argparse
+import sys
 
 
 def log_error(message):
     print("<ERROR>: " + message)
-    exit()
+    sys.exit(1)
 
 
 try:
@@ -31,7 +32,7 @@ parser.add_argument("-dvm", "--debugvm", action="store_true",
                     help="display debug messages from virtual machine \
                         during code execution")
 
-    
+
 if __name__ == "__main__":
     args = parser.parse_args()
     if args.size <= 0:
@@ -55,4 +56,3 @@ if __name__ == "__main__":
             "(or a block with too many codels)")
     else:
         print("Steps limit reached")
-    
