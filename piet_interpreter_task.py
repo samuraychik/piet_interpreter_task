@@ -39,7 +39,7 @@ if __name__ == "__main__":
         log_error("Invalid codel size (must be non-negative)")
     if args.limit <= 0:
         log_error("Invalid steps limit (must be non-negative)")
-        
+
     try:
         interpreter = piet_interpreter.PietInterpreter(args.filename,
                                                        args.size,
@@ -47,12 +47,12 @@ if __name__ == "__main__":
                                                        args.debugvm)
     except FileNotFoundError:
         log_error(f"Couldn't find Piet code image at PATH provided")
-        
+
     try:
         for i in range(args.limit):
             interpreter.piet_step()
     except RecursionError:
-        log_error(f"Provided Piet code has an overly deep recursion " \
-            "(or a block with too many codels)")
+        log_error(f"Provided Piet code has an overly deep recursion "
+                  "(or a block with too many codels)")
     else:
         print("Steps limit reached")
