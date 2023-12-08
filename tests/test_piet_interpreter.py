@@ -16,8 +16,8 @@ class PietInterpreterTestCase(unittest.TestCase):
         self.inter = pinter.PietInterpreter(
             "tests/test_images/init_correct_64.png", 64)
         self.assertEqual(self.inter.codel_size, 64)
-        self.assertEqual(self.inter.codel_x, 0)
-        self.assertEqual(self.inter.codel_y, 0)
+        self.assertEqual(self.inter.curr_x, 0)
+        self.assertEqual(self.inter.curr_y, 0)
         self.assertEqual(self.inter.step, 0)
         self.assertEqual(self.inter.rows, 1)
         self.assertEqual(self.inter.rows, 1)
