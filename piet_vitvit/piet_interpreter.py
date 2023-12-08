@@ -1,14 +1,10 @@
-try:
-    from piet_vitvit.piet_vm import PietVM, CC, DP
-    from piet_vitvit.piet_colors import HEX_COLORS, HEX_WHITE, HEX_BLACK
-except ModuleNotFoundError:
-    from piet_vm import PietVM, CC, DP
-    from piet_colors import HEX_COLORS, HEX_WHITE, HEX_BLACK
-finally:
-    import sys
-    from operator import itemgetter
-    from os.path import abspath
-    from PIL import Image
+import sys
+from operator import itemgetter
+from os.path import abspath
+from PIL import Image
+
+from piet_vitvit.piet_vm import PietVM, CC, DP
+from piet_vitvit.piet_colors import HEX_COLORS, HEX_WHITE, HEX_BLACK
 
 
 PIET_COMMANDS = [
